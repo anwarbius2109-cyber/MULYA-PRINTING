@@ -1,6 +1,22 @@
 [
-  {"nama": "The Wedding Of Nabila & Nanang",
-    "gambar": "assets/100.webp",
+  {
+    "nama": "Khitanan Of Muammar",
+    "gambar": "assets/103.jpeg",
+    "link": "https://id.sudahnikah.com/d/Khitanan-Muammar?kpd=Tamu+Undangan"
+    },
+  {
+    "nama": "Khitanan Of Bara",
+    "gambar": "assets/102.jpeg",
+    "link": "https://id.sudahnikah.com/d/Khitanan-Bara?kpd=Tamu+Undangan"
+    },
+  {
+    "nama": "The Wedding Of Denis & Putri",
+    "gambar": "assets/101.jpeg",
+    "link": "https://id.sudahnikah.com/d/Denis-dan-Putri?kpd=Tamu+Undangan"
+    },
+  {
+    "nama": "The Wedding Of Nabila & Nanang",
+    "gambar": "assets/100.jpeg",
     "link": "https://id.sudahnikah.com/d/Nabila-dan-Nanang?kpd=Tamu+Undangan"
     },
   {
