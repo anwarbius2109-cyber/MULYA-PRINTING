@@ -98,24 +98,29 @@ Saya mau pesan undangan
         </div>
 
         <!-- nama tema -->
-        <div class="px-3 pt-3 text-center text-sm sm:text-base font-semibold">
-          ${item.nama}
-        </div>
+<div class="px-3 pt-3 text-center text-sm sm:text-base font-semibold">
+  ${item.nama}
+</div>
 
-        <!-- tombol -->
-        <div class="p-3 flex flex-col gap-2">
+<!-- harga -->
+<div class="text-center text-[#ee4d2d] text-base font-bold mt-1 mb-3">
+  Rp55.000 - Rp120.000
+</div>
+
+<!-- tombol -->
+<div class="p-3 flex flex-col gap-2">
 
           <a href="${item.link}" target="_blank"
           class="w-full text-center bg-black text-white py-3 rounded-xl text-sm font-semibold active:scale-95 transition">
 
-            Preview
+            👁️ Lihat Demo
 
           </a>
 
           <a href="${linkWA}" target="_blank"
           class="w-full text-center bg-green-500 text-white py-3 rounded-xl text-sm font-semibold active:scale-95 transition">
 
-            Order
+            💬 Pesan Sekarang
 
           </a>
 
@@ -269,40 +274,87 @@ fetch("data/porto.json")
 
     const porto = document.getElementById("portoList");
 
-    if(!porto) return;
+if (!porto) return;
 
-    porto.innerHTML = "";
+const prevBtn = document.getElementById("prevPorto");
+const nextBtn = document.getElementById("nextPorto");
+const pageInfo = document.getElementById("pageInfo");
 
-    data.forEach(item => {
+if (!prevBtn || !nextBtn || !pageInfo) return;
 
-      porto.innerHTML += `
-      
-      <div class="group">
+const perPage = window.innerWidth < 768 ? 8 : 12;
+let currentPage = 1;
+const totalPages = Math.ceil(data.length / perPage);
 
-  <a href="${item.link}" target="_blank">
+    function renderPage(page) {
 
-    <!-- FOTO -->
-    <div class="overflow-hidden rounded-2xl">
+      porto.innerHTML = "";
 
-      <img 
-        src="${item.gambar}" 
-        alt="${item.nama}"
-        class="w-full aspect-square object-cover transition duration-500 group-hover:scale-105"
-      >
+      const start = (page - 1) * perPage;
+      const end = start + perPage;
 
-    </div>
+      data.slice(start, end).forEach(item => {
 
-   <!-- NAMA -->
-<div class="mt-2 text-center text-xs md:text-sm font-semibold leading-tight line-clamp-2 min-h-[38px]">
-  ${item.nama.replace(" Of ", " Of <br>")}
-</div>
+        porto.innerHTML += `
+          <div class="group">
+            <a href="${item.link}" target="_blank">
 
-  </a>
+              <div class="overflow-hidden rounded-2xl">
+                <img
+                  src="${item.gambar}"
+                  alt="${item.nama}"
+                  class="w-full aspect-square object-cover transition duration-500 group-hover:scale-105"
+                >
+              </div>
 
-</div>
+              <div class="mt-2 text-center text-xs md:text-sm font-semibold leading-tight line-clamp-2 min-h-[38px]">
+                ${item.nama.replace(" Of ", " Of <br>")}
+              </div>
 
-      `;
+            </a>
+          </div>
+        `;
+      });
 
+      document.getElementById("pageInfo").textContent =
+        `${page} / ${totalPages}`;
+
+      document.getElementById("prevPorto").disabled = page === 1;
+      document.getElementById("nextPorto").disabled = page === totalPages;
+
+      document.getElementById("prevPorto").classList.toggle(
+        "opacity-40",
+        page === 1
+      );
+
+      document.getElementById("nextPorto").classList.toggle(
+        "opacity-40",
+        page === totalPages
+      );
+    }
+
+    renderPage(currentPage);
+
+    document.getElementById("nextPorto").addEventListener("click", () => {
+      if (currentPage < totalPages) {
+        currentPage++;
+        renderPage(currentPage);
+
+        document
+          .getElementById("porto")
+          .scrollIntoView({ behavior: "smooth" });
+      }
+    });
+
+    document.getElementById("prevPorto").addEventListener("click", () => {
+      if (currentPage > 1) {
+        currentPage--;
+        renderPage(currentPage);
+
+        document
+          .getElementById("porto")
+          .scrollIntoView({ behavior: "smooth" });
+      }
     });
 
   });
