@@ -120,7 +120,7 @@ function tampilkan(){
 
         <div class="text-center text-[#ee4d2d] text-base font-bold mt-1 mb-3">
 
-          Rp55.000 - Rp250.000
+          Rp80.000 - Rp150.000
 
         </div>
 
